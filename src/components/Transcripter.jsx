@@ -6,7 +6,7 @@ function Transcripter() {
         listening,
         resetTranscript,
         browserSupportsSpeechRecognition
-      } = useSpeechRecognition('ddd');
+      } = useSpeechRecognition();
     
       if (!browserSupportsSpeechRecognition) {
         return <span>Browser doesn't support speech recognition.</span>;
