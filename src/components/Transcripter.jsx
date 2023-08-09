@@ -50,7 +50,7 @@ function Transcripter() {
 
   return (
     <div className='App'>
-      <p>Microphone: {listening ? 'Activé' : 'Désactivé'}</p>
+      <p>Microphone: {listening ?<span style={{color : 'green'}}>Activé </span> : <span style={{color: '#dc2626'}}>Désactivé</span>}</p>
 
 <button onClick={()=>{
     SpeechRecognition.startListening({ continuous: true })
@@ -61,10 +61,10 @@ function Transcripter() {
         handleText();
       }}
         style={{ marginLeft: "8px" }}>PAUSE</button>
-      <button onClick={resetTranscript} style={{ marginLeft: "8px", }}>Recommencer</button>
+      <button onClick={resetTranscript} style={{ marginLeft: "8px", }}>RECOMMENCER</button>
       {transcript == ''
         ? <pre>
-          votre texte va s'afficher ici,
+          votre texte s'affichera ici,
           <br />Commencer à parler lorsque l'état
           <br /> du microphone sera sur <b style={{ color: 'green' }}>Activé</b>
         </pre>
@@ -77,9 +77,9 @@ function Transcripter() {
         {isDefinded() ? <div>
           <h1>Code QR</h1>
           <p>
-            <QRCode value={transcript} />
+            <QRCode value={transcript} /> 
           </p>
-        </div> : 'Aucun texte trouvé'}
+        </div> : <span  style={{color: '#fde68a'}}>Votre code QR s'affichera ici</span>}
       </div>
     </div>
   );
