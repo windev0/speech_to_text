@@ -46,14 +46,16 @@ function Transcripter() {
   if (!browserSupportsContinuousListening) {
     console.log(('Votre navigateur ou appareil ne supporte pas l\'activation directe du microphone, actualisez la page voir')
     )
-  } else {
-    SpeechRecognition.startListening({ continuous: true })
-  }
+  } 
 
   return (
     <div className='App'>
       <p>Microphone: {listening ? 'Activé' : 'Désactivé'}</p>
 
+<button onClick={()=>{
+    SpeechRecognition.startListening({ continuous: true })
+
+}}>Commencer</button>
       <button onClick={() => {
         SpeechRecognition.stopListening()
         handleText();
