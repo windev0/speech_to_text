@@ -59,10 +59,14 @@ function Transcripter() {
         handleText();
       }}
         style={{ marginLeft: "8px" }}>{listening ^ browserSupportsContinuousListening ? "ENREGISTRER" : "PAUSE"}</button>
-      <button onClick={resetTranscript} style={{ marginLeft: "8px" }}>Recommencer</button>
-      {transcript == '' ? <pre>votre texte va s'afficher ici,
-        <br />Commencer à parler lorsque l'état <br /> du microphone sera sur <b style={{ color: 'green' }}>Activé</b>
-      </pre> : ''}
+      <button onClick={resetTranscript} style={{ marginLeft: "8px", }}>Recommencer</button>
+      {transcript == ''
+        ? <pre>
+          votre texte va s'afficher ici,
+          <br />Commencer à parler lorsque l'état
+          <br /> du microphone sera sur <b style={{ color: 'green' }}>Activé</b>
+        </pre>
+        : ''}
       <p style={{ width: '90%' }}>{transcript}</p>
       <button onClick={() => handleQRVlaue({ transcript })} >Générer le code QR </button>
       <button onClick={handleCopyClick} style={{ marginLeft: "8px" }} >Copier le texte</button>

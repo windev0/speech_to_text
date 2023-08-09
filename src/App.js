@@ -5,8 +5,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <Transcripter /> */}
-        Nous sommes en maintenace de l'application, elle sera temporairement indisponible
+        <Transcripter />
+        {/* Nous sommes en maintenance de l'application, elle sera temporairement indisponible */}
       </header>
     </div>
   );
