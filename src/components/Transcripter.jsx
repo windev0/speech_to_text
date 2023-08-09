@@ -1,42 +1,77 @@
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import QRCode from 'qrcode.react';
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { textContext } from './context/TexteContext';
+import SpeechRecognition from 'react-speech-recognition';
+
 
 function Transcripter() {
   const {
     transcript,
     listening,
     resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition();
+    browserSupportsSpeechRecognition,
+    browserSupportsContinuousListening,
+    handleCopyClick,
+    isMicrophoneAvailable
+  } = useContext(textContext);
 
   const [QRValue, setQRValue] = useState();
+  const [text, setText] = useState('');
+
+
   const handleQRVlaue = (transcript) => {
     setQRValue((previousValue) => previousValue = transcript)
     return true;
   }
+  const handleText = () => {
+    setText((prevText) => prevText = transcript + ' ')
+    return true
+  }
+
   const isDefinded = () => {
     return QRValue != null
   }
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return <div>
+      <span>Votre navigateur ou appareil ne supporte pas de microphone</span>
+    </div>;
   }
+
+  if (!isMicrophoneAvailable) {
+    return <div>
+      <span>Cette application necéssite l'accès à votre microphone</span>
+    </div>;
+  }
+  if (!browserSupportsContinuousListening) {
+    console.log(('Votre navigateur ou appareil ne supporte pas l\'activation directe du microphone, actualisez la page voir')
+    )
+  } else {
+    SpeechRecognition.startListening({ continuous: true })
+  }
+
   return (
-    <div>
-      <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      {/* <button onClick={SpeechRecognition.startListening({ language: 'en-US' })}>Start in english</button> */}
-      <button onClick={SpeechRecognition.stopListening} style={{ marginLeft: "8px" }}>Stop</button>
-      <button onClick={resetTranscript} style={{ marginLeft: "8px" }}>Reset</button>
-      <p>{transcript}</p>
-      <button onClick={() => handleQRVlaue({ transcript })}>Generate QR code</button>
+    <div className='App'>
+      <p>Microphone: {listening ? 'Activé' : 'Désactivé'}</p>
+
+      <button onClick={() => {
+        SpeechRecognition.stopListening()
+        handleText();
+      }}
+        style={{ marginLeft: "8px" }}>{listening ^ browserSupportsContinuousListening ? "ENREGISTRER" : "PAUSE"}</button>
+      <button onClick={resetTranscript} style={{ marginLeft: "8px" }}>Recommencer</button>
+      {transcript == '' ? <pre>votre texte va s'afficher ici,
+        <br />Commencer à parler lorsque l'état <br /> du microphone sera sur <b style={{ color: 'green' }}>Activé</b>
+      </pre> : ''}
+      <p style={{ width: '90%' }}>{transcript}</p>
+      <button onClick={() => handleQRVlaue({ transcript })} >Generate QR code</button>
+      <button onClick={handleCopyClick} style={{ marginLeft: "8px" }} >Copier le texte</button>
       <div>
         <br />
         {isDefinded() ? <div>
           <h1>QR Code</h1>
           <p>
-            <QRCode value={"Winner"} />
+            <QRCode value={transcript} />
           </p>
         </div> : 'No text found'}
       </div>
