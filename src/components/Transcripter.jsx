@@ -55,7 +55,7 @@ function Transcripter() {
 <button onClick={()=>{
     SpeechRecognition.startListening({ continuous: true })
 
-}}>{listening || browserSupportsContinuousListening ? "ENREGISTRER" : ""}</button>
+}}>{listening ? "ENREGISTRER" : ""}</button>
       <button onClick={() => {
         SpeechRecognition.stopListening()
         handleText();
