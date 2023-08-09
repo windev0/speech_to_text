@@ -55,12 +55,12 @@ function Transcripter() {
 <button onClick={()=>{
     SpeechRecognition.startListening({ continuous: true })
 
-}}>Commencer</button>
+}}>{listening || browserSupportsContinuousListening ? "ENREGISTRER" : ""}</button>
       <button onClick={() => {
         SpeechRecognition.stopListening()
         handleText();
       }}
-        style={{ marginLeft: "8px" }}>{listening ^ browserSupportsContinuousListening ? "ENREGISTRER" : "PAUSE"}</button>
+        style={{ marginLeft: "8px" }}>PAUSE</button>
       <button onClick={resetTranscript} style={{ marginLeft: "8px", }}>Recommencer</button>
       {transcript == ''
         ? <pre>
