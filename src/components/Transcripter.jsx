@@ -64,16 +64,16 @@ function Transcripter() {
         <br />Commencer à parler lorsque l'état <br /> du microphone sera sur <b style={{ color: 'green' }}>Activé</b>
       </pre> : ''}
       <p style={{ width: '90%' }}>{transcript}</p>
-      <button onClick={() => handleQRVlaue({ transcript })} >Generate QR code</button>
+      <button onClick={() => handleQRVlaue({ transcript })} >Générer le code QR </button>
       <button onClick={handleCopyClick} style={{ marginLeft: "8px" }} >Copier le texte</button>
       <div>
         <br />
         {isDefinded() ? <div>
-          <h1>QR Code</h1>
+          <h1>Code QR</h1>
           <p>
             <QRCode value={transcript} />
           </p>
-        </div> : 'No text found'}
+        </div> : 'Aucun texte trouvé'}
       </div>
     </div>
   );
