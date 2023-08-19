@@ -1,5 +1,15 @@
 import { createContext } from "react";
 import { useSpeechRecognition } from 'react-speech-recognition';
+import {
+    EmailShareButton,
+    FacebookShareButton,
+    InstapaperShareButton,
+    LinkedinShareButton,
+    PinterestShareButton,
+    TelegramShareButton,
+    TwitterShareButton,
+    WhatsappShareButton,
+} from "react-share";
 
 export const textContext = createContext()
 
@@ -13,7 +23,7 @@ const TextContextPovider = ({ children }) => {
         isMicrophoneAvailable
     } = useSpeechRecognition();
 
-
+    const facebookShare = <FacebookShareButton url="https://www.facebook.com/" />
     const handleCopyClick = async () => {
         try {
             await navigator.clipboard.writeText(transcript);
@@ -31,6 +41,7 @@ const TextContextPovider = ({ children }) => {
         browserSupportsContinuousListening,
         isMicrophoneAvailable,
         handleCopyClick,
+        facebookShare,
     }
 
 
