@@ -1,4 +1,6 @@
 # Speech-to-Text with QR Share – React App
+![image](https://github.com/user-attachments/assets/6b81c3c4-64bb-4965-8999-943696a859f5)
+
 
 ## Description
 
