@@ -1,5 +1,5 @@
 # Speech-to-Text with QR Share – React App
-<img src="./screenshot.png" alt="screenshot" heigh="200px" width="100%" />
+<img src="./screenshot.png" alt="screenshot" heigh="100" width="100%" />
 
 
 ## Description
